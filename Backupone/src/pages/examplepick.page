@@ -1,0 +1,8 @@
+<apex:page controller="slectpicklistvalues" >
+<apex:form >
+<apex:selectList required="true" multiselect="false" size="1" label="Type"  value="{!selectedValue}">
+<apex:selectOptions value="{!Items}"/>
+</apex:selectList>
+ 
+</apex:form>
+</apex:page>

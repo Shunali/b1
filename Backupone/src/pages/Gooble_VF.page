@@ -1,0 +1,47 @@
+<apex:page controller="GoobleVFPageController" sidebar="false">
+        <!--For data loading through actionStatus-->
+        <apex:actionstatus id="counterStatus">
+            <apex:facet name="start">
+                <div class="waitingSearchDiv"  style="background-color: #fbfbfb; height:100%;opacity:0.70;width:100%;">
+                    <div class="waitingHolder" style="top: 100px; width: 98px;">
+                        <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                        <span class="waitingDescription">Loading...</span>
+                    </div>
+                </div>
+            </apex:facet>
+        </apex:actionstatus>
+        <apex:form Id="test">  
+           <apex:commandLink value="Searh Query History" action="{!History}" />
+         </apex:form>
+        
+        <!-- List of Search history -->
+        <apex:form id="frm" rendered="{!var}">
+            <apex:pageBlock title="History">
+                <apex:pageBlockTable value="{!Cuslst}" var="A" id="Block1" >
+                    <apex:column headerValue="List of Query" > 
+                        <apex:commandLink value="{!A.BodyTxt__c}" action="{!RelatedLinks}" rerender="Block2,frm" status="counterStatus"  >
+                          <apex:param value="{!A.Id}" name="idForConts" assignTo="{!recid}"/>
+                        </apex:commandLink>
+                    </apex:column>  
+                </apex:pageBlockTable>
+            </apex:pageBlock>
+        </apex:form>
+    
+        <apex:form >
+            <!-- List Related to the search History link-->
+            <apex:pageBlock title="List of Results" rendered="{!var}">
+                <apex:pageBlockTable value="{!DeRecords}" var="DeRec" id="Block2">
+                    <apex:column value="{!DeRec.Title__c}"/>
+                    <apex:column value="{!DeRec.Link__c}"/>
+                    <apex:column value="{!DeRec.Snippet__c }"/>
+                </apex:pageBlockTable>
+                <apex:pageblockButtons >
+                <!-- For Pagination-->
+                    <apex:commandButton value="First Page"  action="{!FirstPage}" disabled="{!prev}"/>
+                    <apex:commandButton value="Previous" action="{!previous}" disabled="{!prev}"/>
+                    <apex:commandButton value="Next"  action="{!next}" disabled="{!nxt}"/>
+                    <apex:commandButton value="Last Page" action="{!LastPage}" disabled="{!nxt}"/>
+                </apex:pageblockButtons>
+            </apex:pageBlock>
+       </apex:form>
+</apex:page>

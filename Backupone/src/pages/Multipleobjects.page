@@ -1,0 +1,67 @@
+<apex:page controller="ObjectController">
+
+  <apex:form >
+
+  <apex:inputText value="{!searchStr}"/>
+
+    <apex:commandButton value="Search Record" action="{!ObjectController_method}" reRender="acct,error,oppt,cont,Leadss" status="actStatusId"/>
+   
+
+  </apex:form>
+  
+<apex:form >
+    <apex:outputPanel title="" id="error">
+
+     <apex:pageMessages ></apex:pageMessages>
+
+     </apex:outputPanel>
+
+    <apex:pageBlock title="Accounts" id="acct">
+
+    <apex:pageblockTable value="{!accList }" var="acc">
+    <apex:column > <apex:commandLink value="{!acc.Name}" onClick="window.open('/{!acc.Id}','_blank');"/></apex:column> 
+
+          <apex:column value="{!acc.Type}"/>
+          <apex:column value="{!acc.Website}"/>
+       </apex:pageblockTable>
+
+    </apex:pageBlock>
+
+ <apex:pageBlock title="Contacts" id="cont">
+
+    <apex:pageblockTable value="{!conList}" var="con">
+
+      <apex:column value="{!con.FirstName}"/>
+     <apex:column value="{!con.LastName}"/>
+
+      <apex:column value="{!con.email}"/>
+ </apex:pageblockTable>
+
+ </apex:pageBlock>
+
+ <apex:pageBlock title="Opportunities" id="oppt">
+
+    <apex:pageblockTable value="{!optyList}" var="opty">
+
+      <apex:column value="{!opty.name}"/>
+
+     <apex:column value="{!opty.StageName}"/>
+
+ </apex:pageblockTable>
+ 
+ </apex:pageBlock>
+ 
+  <apex:pageBlock title="Leads" id="Leadss">
+
+    <apex:pageblockTable value="{!LeadList}" var="Ld">
+
+      <apex:column value="{!Ld.FirstName}"/>
+  <apex:column value="{!Ld.LastName}"/>
+     <apex:column value="{!Ld.Company}"/>
+
+ </apex:pageblockTable>
+
+
+ </apex:pageBlock>
+ </apex:form>
+</apex:page>

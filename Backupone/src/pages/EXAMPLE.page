@@ -1,0 +1,11 @@
+<apex:page controller="SelectList">
+<apex:form >
+<apex:pageBlock >
+<apex:selectList size="1" label="{!myval}">
+<apex:selectOptions value="{!myoptions}"></apex:selectOptions>
+<apex:actionSupport event="onchange" action="{!findLabel}" reRender="one" />
+</apex:selectList>
+<apex:outputLabel id="one" >You have selected: {!myval}</apex:outputLabel>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

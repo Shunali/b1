@@ -1,0 +1,51 @@
+<apex:page standardController="Studentss__c" sidebar="false" showHeader="false" extensions="StudentRegistrationPageExtension" language="{!languageCode}">
+    <apex:form >
+        <apex:actionFunction name="renderForLanguage"/>
+    
+        <apex:pageBlock title="{!$Label.Language}">
+        <apex:selectList id="LanguagePick" styleClass="std" size="1" onchange="renderForLanguage()" value="{!languageCode}" Label="Language">
+            <apex:selectOptions value="{!LanguageList}">
+            </apex:selectOptions>
+        </apex:selectList>
+        
+       <apex:pageBlockSection >
+              <apex:inputField value="{!Studentss__c.Name}"/>    
+          </apex:pageBlockSection>
+        
+        <apex:pageBlockSection >
+              <apex:inputField value="{!Studentss__c.Roll_number__c}"/>    
+          </apex:pageBlockSection>
+        
+        <apex:pageBlockSection >
+              <apex:inputField value="{!Studentss__c.Gender__c}"/>    
+          </apex:pageBlockSection>
+        
+        
+          <apex:pageBlockSection >
+              <apex:inputField value="{!Studentss__c.CourseApplyingfor__c}"/>    
+          </apex:pageBlockSection>
+          
+          
+          <apex:pageBlockSection >
+              <apex:inputField value="{!Studentss__c.HSC__c}"/>    
+          </apex:pageBlockSection>
+          
+           <apex:pageBlockSection >
+              <apex:inputField value="{!Studentss__c.SSC__c}"/>    
+          </apex:pageBlockSection>
+          
+           <apex:pageBlockSection >
+              <apex:inputField value="{!Studentss__c.Country__c}"/>    
+          </apex:pageBlockSection>
+          
+            <apex:pageBlockSection >
+              <apex:inputField value="{!Studentss__c.State__c}"/>    
+          </apex:pageBlockSection>
+          
+            <apex:pageBlockSection >
+              <apex:inputField value="{!Studentss__c.City__c}"/>    
+          </apex:pageBlockSection>
+        </apex:pageBlock>
+            <center><apex:commandButton value="Submit" action="{!Save}" onclick="alert('Your admission application has been submitted successfully');" /></center>           
+    </apex:form>  
+</apex:page>

@@ -1,0 +1,82 @@
+<apex:page controller="SOQLDynam">
+  <apex:form id="field">
+    <apex:pageBlock >  
+      <apex:pageBlockSection >
+          
+          <apex:pageBlockSectionItem >
+              <apex:outputLabel value="Objects :" />
+                  <apex:selectList size="1" value="{!selectedObjects}" >
+                  <apex:selectOptions value="{!objects}"  />
+                  <apex:actionSupport event="onchange" action="{!Details}" reRender="field,Field2" />
+                  </apex:selectList>
+          </apex:pageBlockSectionItem><br></br>
+         <!-- 
+          <apex:pageBlockSectionItem>
+              <apex:outputLabel value="{!objdescription}"/>
+          </apex:pageBlockSectionItem>
+          -->
+          <apex:pageBlockSectionItem >
+             <apex:outputLabel value="Select Fields:" />
+              <apex:panelGrid columns="3">
+                  <apex:panelGroup style="width:40%;height:120px" id="Field2">
+                      <apex:selectList value="{!sfields}" multiselect="true" style="width:120px;height:120px;">
+                          <apex:selectOptions value="{!fnsOptions}" />
+                      </apex:selectList>
+                  </apex:panelGroup>
+                    
+                  <apex:panelGroup style="width:20%">
+                     <table height="120px">
+                     <tr><td>
+                          <apex:commandButton value=">>" action="{!addFields}" style="width:80px;" reRender="field"/>
+                          </td>
+                      </tr>
+                      <tr><td>    
+                          <apex:commandButton value="<<" action="{!removeFields}" style="width:80px;" reRender="field"/>
+                          </td>
+                      </tr>     
+                     </table>
+                  </apex:panelGroup>          
+                 
+                  <apex:panelGroup style="width:40%">
+                      <apex:selectList value="{!rfields}" multiselect="true" style="width:120px;height:120px;">
+                          <apex:selectOptions value="{!fsOptions}" />
+                      </apex:selectList>
+                  </apex:panelGroup>              
+              
+              </apex:panelGrid>
+          </apex:pageBlockSectionItem><br></br>
+
+           <apex:pageBlockSectionItem >
+                 <apex:outputlabel value="Number Of Records : "/>      
+                      <apex:selectList value="{!RecordNumber }" size="1">
+                            <apex:selectOptions value="{!SelectedRecordNumbers }"/>
+                      </apex:selectList>
+            </apex:pageBlockSectionItem> 
+             <apex:selectRadio value="{!sorts}" >Sort As
+            <apex:selectOptions value="{!items}" />
+            </apex:selectRadio><p/>
+     
+         </apex:pageBlockSection>
+         
+         <apex:pageBlockSection >
+      
+        <center>  <apex:commandButton value="query" action="{!myQueryData}" reRender="field"/></center>
+       
+           </apex:pageBlockSection>
+                   <table id="field" border="2" width="100%">
+               <tr>
+             <td>{!query}</td>
+         </tr>
+                       </table>
+         <apex:pageBlockSection >
+         <apex:pageBlockSectionItem rendered="{!ptflag}">
+              <apex:pageBlockTable value="{!mydata}" var="a">
+              <apex:repeat value="{!myFields}" var="b">
+              <apex:column value="{!a[b]}"/>
+              </apex:repeat>
+              </apex:pageBlockTable>            
+          </apex:pageBlockSectionItem>
+      </apex:pageBlockSection>
+    </apex:pageBlock>  
+  </apex:form>
+</apex:page>

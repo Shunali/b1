@@ -1,0 +1,30 @@
+<apex:page controller="Pagination">
+    <apex:form >
+        <apex:pageBlock title="Account List" >
+            <apex:pageBlockTable value="{!Accounts}" var="account">
+               
+               <apex:column >
+                    <apex:commandLink value="{!account.Name}" action="/{!account.id}"/>
+                </apex:column>
+                
+                <apex:column value="{!account.Email_Address__c}"/>
+                <apex:column value="{!account.Phone}"/>
+                <apex:column value="{!account.Website}"/>
+                <apex:column value="{!account.Industry}"/>
+                
+                <apex:column >                            
+                  <apex:commandButton value="View" onclick="window.open('/apex/EvaluationTest1_Contacts?id={!account.id}','_blank')"/>
+                </apex:column>
+              
+            </apex:pageBlockTable>
+            
+            <apex:panelGrid columns="4">
+              <apex:commandLink action="{!first}">   First   </apex:commandlink>
+              <apex:commandLink action="{!previous}">Previous</apex:commandlink>
+              <apex:commandLink action="{!next}">    Next    </apex:commandlink>
+              <apex:commandLink action="{!last}">    Last    </apex:commandlink>
+            </apex:panelGrid>
+           
+         </apex:pageBlock> 
+    </apex:form>         
+</apex:page>

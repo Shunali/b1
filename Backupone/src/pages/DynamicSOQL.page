@@ -1,0 +1,52 @@
+<apex:page controller="DynamicSOQL">
+    <apex:form id="od">
+            <apex:pageBlock >
+                <apex:pageBlockSection >
+                            <apex:pageBlockSectionItem >
+                                  <apex:outputlabel value="Object Names :"/>                         
+                                     <apex:selectList size="1" value="{!selectedobj}">
+                                               <apex:selectOptions value="{!objects}"/>
+                                               <apex:actionSupport event="onchange" action="{!getDetails}" reRender="od"/>
+                                    </apex:selectList>     
+                                    </apex:pageBlockSectionItem>      
+                        <!--   <apex:pageBlockSectionItem >
+                               <apex:outputLabel value="{!objDescription }" />                           
+              </apex:pageBlockSectionItem> -->
+              <apex:pageBlockSectionItem >
+                      <apex:panelGrid columns="3" >
+                              <apex:PanelGroup Style="width:40%" >
+                                  <apex:selectList value="{!sfields}" multiselect="true" style="width:200px; height:150px">
+                                    <apex:selectoptions value="{!fnsoptions}"/>
+                                  </apex:selectList>
+                              </apex:PanelGroup>
+                               <apex:PanelGroup Style="width:20%; height:120px;">
+                                 <table height="120px">
+                                       <tr>
+                                       <td><apex:commandButton value=">>" action="{!AddFields}" Style="width:40px;" reRender="od"/></td>
+                                       </tr>
+                                 
+                                      <tr>
+                                       <td><apex:commandButton value="<<" action="{!RemoveFields}" Style="width:40px;" reRender="od"/></td>
+                                      </tr>
+                                 </table>
+                              </apex:PanelGroup>
+                               <apex:PanelGroup >
+                                  <apex:selectList value="{!rfields}" multiselect="true" style="width:200px; height:150px">
+                                    <apex:selectoptions value="{!fsoptions}"/>
+                                  </apex:selectList>
+                              </apex:PanelGroup>
+                      </apex:panelGrid>
+              </apex:pageBlockSectionItem>
+              <apex:pageBlockSectionItem >
+                 <apex:pageBlockTable value="{!data}" var="a" >
+                   <apex:repeat value="{!Fields1}" var="b">
+                 
+                   </apex:repeat>
+                  </apex:pageBlockTable>
+              </apex:pageBlockSectionItem>
+                </apex:pageBlockSection> 
+                <apex:commandButton value="Execute Query" action="{!QueryData}" reRender="od"/>
+                   {!query}              
+            </apex:pageBlock>       
+    </apex:form>
+</apex:page>
